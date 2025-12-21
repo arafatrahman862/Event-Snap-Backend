@@ -1,0 +1,22 @@
+model Payment {
+    id                 String        @id @default(uuid())
+    transactionId      String        @unique
+    paymentGatewayData Json? 
+    // 
+    amount             Float
+    paymentStatus      PaymentStatus @default(PENDING)
+    invoiceUrl         String? 
+
+    eventId  String
+    clientId String
+    hostId   String
+    participantId String
+
+    createdAt DateTime @default(now())
+
+    event  Event  @relation(fields: [eventId], references: [id])
+    client Client @relation(fields: [clientId], references: [id])
+    
+
+    @@map("payments")
+}

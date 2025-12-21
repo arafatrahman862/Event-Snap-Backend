@@ -1,0 +1,18 @@
+
+
+model Review {
+    id            String           @id @default(uuid())
+    transactionId String           @unique  // ← ADD THIS FIELD
+    rating        Int
+    comment       String?
+    eventId       String
+    clientId      String
+    hostId        String
+    createdAt     DateTime         @default(now())
+    
+    event       Event            @relation(fields: [eventId], references: [id])
+    client      Client           @relation(fields: [clientId], references: [id])
+    participant EventParticipant @relation("ParticipantReview", fields: [transactionId], references: [transactionId])
+
+    @@map("reviews")
+}
