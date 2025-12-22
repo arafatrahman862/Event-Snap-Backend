@@ -1,185 +1,150 @@
-# Eventra - Events & Activities Platform (Backend)
+# EventSnap
 
-#### Live API: [eventra-backend.vercel.app](https://eventra-backend.vercel.app)
+#### Live API:
 
-#### Frontend: [eventra-frontend-neon.vercel.app](https://eventra-frontend-neon.vercel.app)
+#### Frontend:
 
-#### Frontend-Repository: [https://github.com/Sazid60/Eventra-Frontend.git](https://github.com/Sazid60/Eventra-Frontend.git)
+#### Frontend Repository:
 
-#### Demo Video: [Video_link](https://drive.google.com/file/d/1eeQLkki_Evg1nFA_3IS3wPqMEEpBY5z9/view)
+#### Demo Video:
 
-Eventra is a full-featured backend for creating, discovering(mind like events), joining, and managing events with a sophisticated event ecosystem. It supports three distinct roles (Admin, Host, Client) with fine-grained access controls, secure SSLCommerz payment processing, peer-to-peer reviews with host rating aggregation, event income separation 10% admin and 90% host, comprehensive analytics dashboards,  all user management, all host management, host/ event application management and multi-template email notifications. Features interest-based event personalization, real-time event management, transactional integrity for payments and bookings, and admin-driven approval workflows for hosts and events. Built with TypeScript, Prisma/PostgreSQL, and modern Node.js best practices.
+EventSnap is a robust backend platform designed for seamless event management, enabling users to create, discover, join, and organize events efficiently. The system facilitates distinct access levels for Admins, Hosts, and Clients—empowering granular permissions, payment handling via SSLCommerz, real-time analytics, dynamic user management, host and event oversight, and multi-channel notifications. EventSnap is engineered with advanced personalization (matching user interests to events), transactional integrity, and a 90/10 revenue distribution model. Built using TypeScript, Prisma ORM, PostgreSQL, and modern Node.js methodologies, it is structured for scalability and security.
 
 ---
 
 ## Project Overview
 
-- Users discover and join events based on interests.
-- Hosts create/manage events, track participants, and receive payments.
-- Admins oversee users, hosts, events, and system health.
-- Payments processed via SSLCommerz; reviews update host ratings; dashboards expose key stats.
+- Intuitive event discovery and participation based on personalized user interests.
+- Hosts manage event lifecycle and monitor participant engagement with transparent payment processing.
+- Administrators oversee platform operations including user, host, and event governance as well as system reporting.
+- Comprehensive statistics and dashboards provide actionable insights for all roles.
 
 ---
 
-## Technologies
+## Technology Stack
 
-### Core & Runtime
+### Backend & Core
 
-- **Node.js :** JavaScript runtime
-- **Express.js :** HTTP server & REST API routing
-- **TypeScript :** Static type checking & compilation
+- **Node.js** — High-performance JavaScript runtime.
+- **Express.js** — RESTful API routing and middleware.
+- **TypeScript** — Advanced type safety for scalable codebases.
 
-### Database & ORM
+### Data Layer
 
-- **Prisma :** TypeScript ORM for PostgreSQL
-- **PostgreSQL :** Relational database (Neon for production)
-- **@prisma/client :** Prisma client library
+- **Prisma ORM** — Type-safe ORM for PostgreSQL integration.
+- **PostgreSQL** — Reliable, cloud-ready relational database (Neon DB for production).
+- **@prisma/client** — Auto-generated client for database operations.
 
-### Authentication & Security
+### Security & Authentication
 
-- **jsonwebtoken :** JWT token creation/verification (access/refresh)
-- **bcryptjs :** Password hashing and verification
-- **cookie-parser :** HTTP cookie parsing (optional token storage)
+- **jsonwebtoken** — Secure JWT access and refresh token handling.
+- **bcryptjs** — Password security via robust hashing.
+- **cookie-parser** — Facilitates secure token storage through HTTP cookies.
 
-### Validation & Serialization
+### Validation & Utilities
 
-- **Zod :** Schema validation for requests/payloads
-- **uuid :** Unique ID generation
+- **zod** — Precise request validation.
+- **uuid** — Universal unique ID generator.
 
-### File Handling & Cloud Storage
+### Media & Storage
 
-- **Multer :** Multipart form data file upload middleware
-- **multer-storage-cloudinary :** Cloudinary storage adapter for Multer
-- **Cloudinary :** Cloud image storage and optimization
+- **Multer** — File upload middleware supporting multipart/form-data.
+- **multer-storage-cloudinary** — Seamless integration with Cloudinary for media storage.
+- **Cloudinary** — Image storage, transformation, and optimization.
 
-### Email & Templating
+### Communication
 
-- **nodemailer :** Email delivery (SMTP)
-- **EJS :** Email template rendering
+- **nodemailer** — SMTP email sending.
+- **EJS** — Flexible, template-based email content rendering.
 
-### HTTP & Network
+### Networking & APIs
 
-- **Axios :** HTTP client (SSLCommerz API calls)
-- **CORS :.** Cross-Origin Resource Sharing middleware
-- **http-status :** HTTP status code utilities
-- **http-status-codes :** Alternative HTTP status constants
+- **Axios** — HTTP client, including support for SSLCommerz communications.
+- **CORS** — Cross-Origin Resource Sharing management.
+- **http-status**, **http-status-codes** — Response code utilities for consistent API responses.
 
-### Middleware & Rate Limiting
+### Middleware & Tooling
 
-- **express-rate-limit :** API rate limiting middleware
+- **express-rate-limit** — Throttling requests for API protection.
+- **dotenv** — Environment variable loader and manager.
 
-### Environment & Configuration
+### Development Utilities
 
-- **dotenv :** Environment variable management
-
-### Development Tools
-
-- **ts-node-dev :** Watch mode TypeScript development server
-- **ts-node :** TypeScript execution without compilation
-- **tsx :** Fast TypeScript transpiler
-
-### Type Definitions (Dev Dependencies)
-
-- **@types/express**, **@types/node**, **@types/jsonwebtoken**, **@types/multer**, **@types/nodemailer**, **@types/ejs**, **@types/cors**, **@types/cookie-parser** – TypeScript type definitions for all major packages
+- **ts-node**, **ts-node-dev**, **tsx** — TypeScript runtime and dev tooling.
+- **Type Definitions** — Complete type coverage for all major packages through `@types/*`.
 
 ---
 
-## Features (Detailed)
+## Feature Highlights
 
 ### Authentication & Roles
 
-- JWT authentication with access/refresh tokens; HTTP-only cookies supported.
-- Roles: **ADMIN**, **HOST**, **CLIENT** with route guards.
-- Password hashing (bcrypt);
-- Refresh token endpoint to renew sessions.
+- JWT-based OAuth with HTTP-only cookie support.
+- Three-tiered access: **ADMIN**, **HOST**, and **CLIENT** utilizing fine-grained route guards.
+- Secure credential management and refresh workflows.
 
-### User Profiles
+### Profile Management
 
-- Create/update profile: name, bio, interests, location, contact number, profile photo (Cloudinary).
-- View own profile; admins can list/filter users with pagination & search.
+- Dynamic user profiles: support for avatars, interests, location, and contact details.
+- Admin and user-level profile visibility, with advanced search and pagination.
 
-### Event Lifecycle
+### Event Management
 
-- Hosts: create, update, delete, complete events;
-- Status flow: PENDING → OPEN → FULL / COMPLETED / REJECTED / CANCELLED.
-- Capacity management: auto FULL when seats exhausted; reopen seats on leave.
-- Validation: block past-date events from listings; recent events (limit 6) for landing page.
-- Search & filters: searchTerm, category, date; interest-based ordering for signed-in users.
+- Hosts: Comprehensive control over event creation, updates, completion, and deletion.
+- Lifecycle tracking with automated state transitions (PENDING, OPEN, FULL, COMPLETED, REJECTED, CANCELLED).
+- Intelligent seat management ensuring transactional integrity.
 
 ### Participation
 
-- Clients join events (creates participant + pending payment); leave events before event date.
-- ParticipantStatus respected; seat counts adjusted transactionally.
-- Host/Admin can view participants (in event details page) with review status flags.
+- Clients join and leave events with seat availability updating atomically.
+- Real-time participation flags enhance host/admin event tracking.
 
-### Payments (SSLCommerz)
+### Payment Processing
 
-- Join event initiates payment; stores transactionId; links participant, event, host, client.
-- Success/fail/cancel IPN handlers update PaymentStatus and event capacity/status accordingly.
-- **Revenue Sharing Model**: Automatic 90/10 split on successful payments (90% to host, 10% platform fee to admin).
-- Income tracking: Host and Admin models maintain cumulative `income` fields updated transactionally.
-- Role-based visibility: Admin sees all payments; Host sees payments for own events.
-- Search/pagination/sort on payments (transactionId, client name, status).
+- SSLCommerz-powered payments with automated tracking.
+- Role-based payment visibility, rigorous revenue splits (90% host / 10% admin).
+- Administrative and host income records updated with each transaction.
 
-### Reviews & Ratings
+### Reviews and Ratings
 
-- Clients can review hosts only after event is COMPLETED and payment is PAID.
-- Prevent duplicate reviews per client per event; updates host rating aggregates.
-- Latest 20 reviews endpoint for landing page.
+- Only clients who have paid and attended events may submit reviews.
+- Robust system for host rating updates and duplicate prevention.
+- Recent reviews endpoint for platform trust-building.
 
 ### Analytics & Meta
 
-- Landing stats: total events, completed events, successful payments, clients, hosts, reviews, average rating.
-- Role dashboards: admin (system totals, pending apps), host (their events, revenue), client (their participation).
+- Public and role-based dashboards for real-time data on users, events, revenues, and engagement.
+- Landing page statistics reflecting overall platform activity.
 
 ### Email & Notifications
 
-- Contact form sends email to admin via `contact-email.ejs`.
-- host application email, host rejection email, event payment invoice email also sent by ejs.
+- Modular, template-driven notification system for all key workflows (contact, application, payment, etc.).
+- SMTP delivery via Nodemailer/EJS for consistent user experience.
 
-### Security & Middleware
+### Security and Validation
 
-- Rate limiting middleware available; centralized error handler; validation via Zod.
-- Role-based auth guard; input validation; Prisma query scoping per role.
+- API rate limiting, central error handling, and role-aware route restrictions.
+- All input data is strictly validated using Zod.
 
-### File Handling
+### File Management
 
-- Multer for upload; Cloudinary for storage; cleanup of replaced images on update where applicable.
+- Media uploads handled transactionally; old images automatically purged on update.
+- Full integration with Cloudinary for optimized storage.
 
-### Pagination & Sorting
+### Data Navigation
 
-- Consistent pattern using `paginationHelper` across list endpoints; meta includes page/limit/total.
+- Pagination, filtering, and sorting standardized across API endpoints for all lists.
+- Personalization algorithms align user interests with event recommendations.
 
-### Personalization ("mind-like" events)
+### Administrative Capabilities
 
-- Interest-weighted event ordering for authenticated users (matches user interests to event categories).
-- Recent events curated for landing; excludes past or rejected/cancelled events.
-- Role-aware responses (admin vs host vs client) tailor what data and actions are available.
-
-### Admin Controls
-
-- Host applications: approve/reject; escalates user to Host on approval.
-- Event applications: approve/reject; enforces status transitions.
-- User suspension/unsuspension affecting login and visibility.
-- Payment history
-- Lists for hosts/clients with search, status filters, pagination.
-
-### Guardrails & Eligibility
-
-- Review eligibility: only after event COMPLETED and payment PAID; one review per client/event.
-- Join/leave rules: cannot overbook; leaving frees seats before event date; capacity/state updates are transactional.
-- Payment visibility scoped by role; host cannot see others’ event payments.
-- Image replacement cleans up previous uploads where applicable.
-
-### Validation & Error Handling
-
-- Zod-powered request validation on inputs and multipart payloads.
-- Centralized error handler with structured `ApiError` responses.
-- Rate limiter middleware available for abuse protection.
+- Full suite of host and event approval workflows.
+- Suspension controls for users, with impact on authentication and access.
+- Financial visibility restricted by role to protect sensitive data.
 
 ---
 
-## Project Structure
+## Project Architecture
 
 ```
 src/
@@ -236,8 +201,8 @@ CLOUDINARY_API_SECRET=
 
 SSL_STORE_ID=
 SSL_STORE_PASS=
-SSL_PAYMENT_API=https://sandbox.sslcommerz.com/gwprocess/v3/api.php
-SSL_VALIDATION_API=https://sandbox.sslcommerz.com/validator/api/validationserverAPI.php
+SSL_PAYMENT_API=
+SSL_VALIDATION_API=
 SSL_IPN_URL=
 SSL_SUCCESS_BACKEND_URL=
 SSL_FAIL_BACKEND_URL=
@@ -249,138 +214,112 @@ SSL_CANCEL_FRONTEND_URL=
 
 ---
 
-## Setup & Run Locally
 
-```bash
-git clone https://github.com/Sazid60/Eventra-Backend.git
-cd Backend
-npm install
-npx prisma generate
-# create .env using the vars above
-npm run dev
-```
+## Test Credentials
 
-### Useful Scripts
+**Admin**
+- Email: admin@gmail.com
+- Password: Admin123@
 
-- `npm run dev` – start in watch mode
-- `npm run build` – compile TypeScript
+**Host**
+- Email: host@gmail.com
+- Password: Host123@
 
+**Client**
+- Email: client@gmail.com
+- Password: Client123@
 
 ---
 
-## Credentials for Testing
+## API Overview
 
-##### Admin Login
-
-- _Admin Email_: admin@gmail.com
-- _Admin Password_: Admin@12345
-
-##### Host Login (host-1)
-
-- _Host Email_: host@gmail.com
-- _Host Password_: Host@12345
-
-##### Host Login (host-2)
-
-- _Host Email_: host1@gmail.com
-- _Host Password_: Host@12345
-
-##### Client Login
-
-- _Client Email_: client@gmail.com
-- _Client Password_: Client@12345
+- **Auth**: `/api/v1/auth` – authentication workflows (sign in, refresh, reset, host applications).
+- **User**: `/api/v1/user` – self/profile management, email contact to administrators.
+- **Host**: `/api/v1/host` – event management (CRUD, completion), retrieve hosted events.
+- **Event**: `/api/v1/event` – event browsing, joining/leaving, event details, recent/popular listings.
+- **Payment**: `/api/v1/payment` – transaction records, SSLCommerz callbacks, admin/host views.
+- **Review**: `/api/v1/review` – leave feedback, fetch latest reviews per host/event.
+- **Meta**: `/api/v1/meta` – dashboards and statistics.
 
 ---
 
-## Core API Surface (high level)
-
-- **Auth**: `/api/v1/auth` — login, register, refresh, password reset flows
-- **Users**: `/api/v1/user` — me, list/filter, update profile, contact email to admin
-- **Hosts**: `/api/v1/host` — create/update/delete events, my hosted events, complete/cancel
-- **Events**: `/api/v1/event` — list with filters/search, single, join/leave, recent, participants
-- **Payments**: `/api/v1/payment` — SSLCommerz callbacks, list/search/sort/paginate
-- **Reviews**: `/api/v1/review` — create review, latest 20
-- **Meta**: `/api/v1/meta` — landing stats and dashboards
-
----
-
-## Endpoint Details (selected)
+## Selected Endpoint Reference
 
 ### Auth
 
-- `POST /api/v1/auth/login` — email/password → access/refresh; sets cookies if configured.
-- `POST /api/v1/auth/refresh-token` — refresh → new access; requires refresh token.
-- `GET /api/v1/auth/me` — returns user with role; requires access token.
-- `POST /api/v1/auth/reset-password` — Admin-only password reset for a user by id.
-- `POST /api/v1/auth/apply-host` — Client requests Host role; creates application.
+- `POST /api/v1/auth/login` – Sign in, returns tokens (optionally as cookies).
+- `POST /api/v1/auth/refresh-token` – Access token renewal.
+- `GET /api/v1/auth/me` – Authenticated user profile and role.
+- `POST /api/v1/auth/reset-password` – Admin resets user passwords.
+- `POST /api/v1/auth/apply-host` – Clients apply for host privileges.
 
 ### User
 
-- `POST /api/v1/user/create-client` — multipart `file` + `data` JSON; creates Client with profile; email unique check; uploads avatar.
-- `PATCH /api/v1/user/update-my-profile` — multipart optional `file` + `data`; merges interests, updates profile, replaces image.
-- `POST /api/v1/user/send-email` — contact form to admin (name, email, contactNumber, subject, message); sends via Nodemailer/EJS.
+- `POST /api/v1/user/create-client` – Register (profile and avatar upload).
+- `PATCH /api/v1/user/update-my-profile` – Update personal profile or interests.
+- `POST /api/v1/user/send-email` – Contact the administrator.
 
 ### Admin
 
-- `GET /api/v1/admin/host-applications` — list host applications with filters (status, searchTerm, pagination).
-- `PATCH /api/v1/admin/host-applications/:id/approve|reject` — approve/reject host application; toggles Host status and user role.
-- `GET /api/v1/admin/event-applications` — list pending/filtered events for approval.
-- `PATCH /api/v1/admin/event-application/:id/approve|reject` — approve/reject event; sets status accordingly.
-- `GET /api/v1/admin/clients` — list clients with status/search filters.
-- `GET /api/v1/admin/hosts` — list hosts with status/search filters.
-- `PATCH /api/v1/admin/suspend-user/:userId` — suspend user (affects auth/visibility).
-- `PATCH /api/v1/admin/unsuspend-user/:userId` — reverse suspension.
+- `GET /api/v1/admin/host-applications` – Review host applications.
+- `PATCH /api/v1/admin/host-applications/:id/approve|reject` – Host application management.
+- `GET /api/v1/admin/event-applications` – Pending events for review.
+- `PATCH /api/v1/admin/event-application/:id/approve|reject` – Approve/reject event postings.
+- `GET /api/v1/admin/clients` – Client listing (search/filters).
+- `GET /api/v1/admin/hosts` – Host listing (search/filters).
+- `PATCH /api/v1/admin/suspend-user/:userId` – Suspend a user.
+- `PATCH /api/v1/admin/unsuspend-user/:userId` – Re-enable a user.
 
 ### Host
 
-- `POST /api/v1/host/create-event` — multipart `file` + `data`; creates event with banner; status PENDING until approved.
-- `PATCH /api/v1/host/event/:eventId` — update event fields; optional new banner; respects ownership and status rules.
-- `DELETE /api/v1/host/event/:eventId` — delete own event if allowed by status.
-- `GET /api/v1/host/my-hosted-events` — paginated, filterable list of host’s events.
-- `PATCH /api/v1/host/event-complete/:eventId` — mark event COMPLETED; triggers review eligibility.
+- `POST /api/v1/host/create-event` – Propose a new event.
+- `PATCH /api/v1/host/event/:eventId` – Modify event details.
+- `DELETE /api/v1/host/event/:eventId` – Remove event.
+- `GET /api/v1/host/my-hosted-events` – Retrieve all events organized by the host.
+- `PATCH /api/v1/host/event-complete/:eventId` – Finalize event, open review window.
 
-### Event (public/client)
+### Event (Public/Client)
 
-- `GET /api/v1/event/all-events` — searchTerm, category, date filters; excludes past dates; interest-weighted ordering for signed-in users.
-- `GET /api/v1/event/:eventId` — single event detail with host info and availability.
-- `POST /api/v1/event/join/:eventId` — client joins, creates participant + pending payment, generates SSLCommerz session.
-- `POST /api/v1/event/leave/:eventId` — client leaves before event date; frees seat; updates participant/payment state.
-- `GET /api/v1/event/my-events` — client’s joined events with participantStatus/date/search filters; paginated with totals.
-- `GET /api/v1/event/participants/:eventId` — host/admin view participants; includes review flags and payment status.
-- `GET /api/v1/event/recent-events` — latest 6 future OPEN events for landing.
+- `GET /api/v1/event/all-events` – Filter/sort/search all available events.
+- `GET /api/v1/event/:eventId` – Event detail retrieval.
+- `POST /api/v1/event/join/:eventId` – Register to participate (triggers payment).
+- `POST /api/v1/event/leave/:eventId` – Withdraw from an event before it starts.
+- `GET /api/v1/event/my-events` – View all joined events.
+- `GET /api/v1/event/participants/:eventId` – Retrieve event participants for host/admin roles.
+- `GET /api/v1/event/recent-events` – Highlights of upcoming events.
 
-### Payments
+### Payment
 
-- `GET /api/v1/payment` — list payments with search/pagination/sort; role-scoped (admin all, host own events).
-- `POST /api/v1/payment/success|fail|cancel` (SSLCommerz IPN callbacks) — updates PaymentStatus and event capacity/status.
-- `POST /api/v1/payment/validate` (if exposed) — validation hit from SSLCommerz; finalizes payment.
+- `GET /api/v1/payment` – Search and view payments (scoped by role).
+- `POST /api/v1/payment/success|fail|cancel` – Payment result webhooks.
+- `POST /api/v1/payment/validate` – Handle payment finalization.
 
 ### Review
 
-- `POST /api/v1/review/:transactionId` — client review for a completed, paid event; prevents duplicates; updates host rating.
-- `GET /api/v1/review` — latest 20 reviews for landing display.
+- `POST /api/v1/review/:transactionId` – Submit a review (one per client/event; only for completed, paid events).
+- `GET /api/v1/review` – Fetch the 20 most recent reviews.
 
 ### Meta
 
-- `GET /api/v1/meta` — auth dashboards (counts for admin/host/client depending on role).
-- `GET /api/v1/meta/landing-page` — public landing stats (events, payments, clients, hosts, reviews, avg rating).
+- `GET /api/v1/meta` – Authenticated dashboard data for admins, hosts, or clients.
+- `GET /api/v1/meta/landing-page` – Public-facing statistics for the landing page.
 
 ---
 
-## Notable Behaviors
+## Platform Behaviors & Policies
 
-- Event listings exclude past-date events; recent events endpoint returns 6.
-- Capacity and status are kept consistent inside Prisma transactions.
-- Payments are role-scoped (admin sees all; host sees own events only).
-- Reviews allowed only for paid, completed events; duplicates blocked.
-- Contact form emails go to admin using `contact-email.ejs`.
-- once you join a event you can leave any time until the event ends but if you leave no refund policy is kept
+- Only future-dated events are listed; "recent events" APIs highlight upcoming opportunities (limit 6).
+- Participant capacity, payment status, and event lifecycle transitions are managed within robust database transactions.
+- Role-based data security is enforced across payments and reviews.
+- Only verified event attendance allows review submission; one review per client/event.
+- Administrative contact form submissions use EJS templating and are sent via SMTP.
+- Event withdrawal permitted until start; no refunds after departure.
 
 ---
 
-## Deployment
+## Deployment Guidance
 
-- Designed to run on Vercel/Node with a managed Postgres
-- Run `npx prisma generate` after deploying or changing the schema.
+- Deployable on modern Node.js environments (e.g., Vercel) with managed PostgreSQL.
+- Run `npx prisma generate` after any schema updates for database synchronization.
 
 ---
