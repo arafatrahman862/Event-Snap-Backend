@@ -1,12 +1,6 @@
 # EventSnap
 
-#### Live API:
 
-#### Frontend:
-
-#### Frontend Repository:
-
-#### Demo Video:
 
 EventSnap is a robust backend platform designed for seamless event management, enabling users to create, discover, join, and organize events efficiently. The system facilitates distinct access levels for Admins, Hosts, and Clients—empowering granular permissions, payment handling via SSLCommerz, real-time analytics, dynamic user management, host and event oversight, and multi-channel notifications. EventSnap is engineered with advanced personalization (matching user interests to events), transactional integrity, and a 90/10 revenue distribution model. Built using TypeScript, Prisma ORM, PostgreSQL, and modern Node.js methodologies, it is structured for scalability and security.
 

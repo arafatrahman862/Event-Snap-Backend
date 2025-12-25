@@ -10,3 +10,5 @@ uploads/*
 !uploads/.gitkeep
 *.log
 .vercel
+
+.vercel

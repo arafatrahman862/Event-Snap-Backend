@@ -10,11 +10,13 @@ import express from 'express';
 const app: Application = express();
 app.use(cookieParser());
 
-app.use(cors())
-// app.use(cors({
-//     origin: 'https://eventra-frontend-neon.vercel.app',
-//     credentials: true
-// }));
+// app.use(cors())
+app.use(
+  cors({
+    origin: "https://assingment-8-frontend.vercel.app",
+    credentials: true,
+  })
+);
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
