@@ -1,6 +1,6 @@
 {
   "$schema": "https://json.schemastore.org/package.json",
-  "name": "eventra",
+  "name": "eventSnap",
   "version": "1.0.0",
   "description": "[prisma](https://www.prisma.io/docs/getting-started/prisma-orm/quickstart/postgresql)",
   "main": "index.js",
